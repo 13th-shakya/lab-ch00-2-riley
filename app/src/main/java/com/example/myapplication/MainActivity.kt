@@ -42,21 +42,21 @@ class MainActivity : AppCompatActivity() {
             val computerChoice = Choice.entries.random()
             binding.textViewComputerPlayed.text = "電腦出拳\n$computerChoice"
 
-            if (binding.radioButtonScissors.isChecked && computerRandom == 2 ||
-                binding.radioButtonRock.isChecked && computerRandom == 0 ||
-                binding.radioButtonPaper.isChecked && computerRandom == 1
-            ) {
-                binding.textViewWinner.text = "勝利者\n$binding.editTextName.text"
-                binding.textViewStatus.text = "恭喜您獲勝了！！！"
-            } else if (binding.radioButtonScissors.isChecked && computerRandom == 1 ||
-                binding.radioButtonRock.isChecked && computerRandom == 2 ||
-                binding.radioButtonPaper.isChecked && computerRandom == 0
-            ) {
-                binding.textViewWinner.text = "勝利者\n電腦"
-                binding.textViewStatus.text = "可惜，電腦獲勝了！"
-            } else {
-                binding.textViewWinner.text = "勝利者\n平手"
-                binding.textViewStatus.text = "平局，請再試一次！"
+            when (determineWinner(playerChoice, computerChoice)) {
+                Result.WIN -> {
+                    binding.textViewWinner.text = "勝利者\n$playerName"
+                    binding.textViewStatus.text = "恭喜您獲勝了！！！"
+                }
+
+                Result.LOSE -> {
+                    binding.textViewWinner.text = "勝利者\n電腦"
+                    binding.textViewStatus.text = "可惜，電腦獲勝了！"
+                }
+
+                Result.TIE -> {
+                    binding.textViewWinner.text = "勝利者\n平手"
+                    binding.textViewStatus.text = "平局，請再試一次！"
+                }
             }
         }
     }
@@ -70,4 +70,15 @@ enum class Choice {
         PAPER -> "布"
         SCISSORS -> "剪刀"
     }
+}
+
+enum class Result { WIN, LOSE, TIE }
+
+fun determineWinner(player: Choice, computer: Choice): Result = when {
+    player == computer -> Result.TIE
+    (player == Choice.SCISSORS && computer == Choice.PAPER) ||
+            (player == Choice.ROCK && computer == Choice.SCISSORS) ||
+            (player == Choice.PAPER && computer == Choice.ROCK) -> Result.WIN
+
+    else -> Result.LOSE
 }
