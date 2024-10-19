@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            binding.textViewName.text = "名字\n$binding.editTextName.text"
+            val playerName = binding.editTextName.text.toString()
+            binding.textViewName.text = "名字\n$playerName"
 
             if (binding.radioButtonScissors.isChecked) {
                 binding.textViewPlayerPlayed.text = "我方出拳\n剪刀"
