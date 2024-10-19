@@ -32,22 +32,15 @@ class MainActivity : AppCompatActivity() {
             val playerName = binding.editTextName.text.toString()
             binding.textViewName.text = "名字\n$playerName"
 
-            if (binding.radioButtonScissors.isChecked) {
-                binding.textViewPlayerPlayed.text = "我方出拳\n剪刀"
-            } else if (binding.radioButtonRock.isChecked) {
-                binding.textViewPlayerPlayed.text = "我方出拳\n石頭"
-            } else {
-                binding.textViewPlayerPlayed.text = "我方出拳\n布"
+            val playerChoice = when {
+                binding.radioButtonScissors.isChecked -> Choice.SCISSORS
+                binding.radioButtonRock.isChecked -> Choice.ROCK
+                else -> Choice.PAPER
             }
+            binding.textViewPlayerPlayed.text = "我方出拳\n$playerChoice"
 
-            val computerRandom = (Math.random() * 3).toInt()
-            if (computerRandom == 0) {
-                binding.textViewComputerPlayed.text = "電腦出拳\n剪刀"
-            } else if (computerRandom == 1) {
-                binding.textViewComputerPlayed.text = "電腦出拳\n石頭"
-            } else {
-                binding.textViewComputerPlayed.text = "電腦出拳\n布"
-            }
+            val computerChoice = Choice.entries.random()
+            binding.textViewComputerPlayed.text = "電腦出拳\n$computerChoice"
 
             if (binding.radioButtonScissors.isChecked && computerRandom == 2 ||
                 binding.radioButtonRock.isChecked && computerRandom == 0 ||
@@ -66,5 +59,15 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewStatus.text = "平局，請再試一次！"
             }
         }
+    }
+}
+
+enum class Choice {
+    ROCK, PAPER, SCISSORS;
+
+    override fun toString() = when (this) {
+        ROCK -> "石頭"
+        PAPER -> "布"
+        SCISSORS -> "剪刀"
     }
 }
