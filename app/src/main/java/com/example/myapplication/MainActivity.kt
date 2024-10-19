@@ -48,15 +48,15 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewComputerPlayed.text = "電腦出拳\n布"
             }
 
-            if ((binding.radioButtonScissors.isChecked && computerRandom == 2) ||
-                (binding.radioButtonRock.isChecked && computerRandom == 0) ||
-                (binding.radioButtonPaper.isChecked && computerRandom == 1)
+            if (binding.radioButtonScissors.isChecked && computerRandom == 2 ||
+                binding.radioButtonRock.isChecked && computerRandom == 0 ||
+                binding.radioButtonPaper.isChecked && computerRandom == 1
             ) {
                 binding.textViewWinner.text = "勝利者\n$binding.editTextName.text"
                 binding.textViewStatus.text = "恭喜您獲勝了！！！"
-            } else if ((binding.radioButtonScissors.isChecked && computerRandom == 1) ||
-                (binding.radioButtonRock.isChecked && computerRandom == 2) ||
-                (binding.radioButtonPaper.isChecked && computerRandom == 0)
+            } else if (binding.radioButtonScissors.isChecked && computerRandom == 1 ||
+                binding.radioButtonRock.isChecked && computerRandom == 2 ||
+                binding.radioButtonPaper.isChecked && computerRandom == 0
             ) {
                 binding.textViewWinner.text = "勝利者\n電腦"
                 binding.textViewStatus.text = "可惜，電腦獲勝了！"
@@ -65,6 +65,5 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewStatus.text = "平局，請再試一次！"
             }
         }
-
     }
 }
