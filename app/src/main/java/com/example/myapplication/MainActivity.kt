@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.buttonPlay.setOnClickListener { _ ->
+        binding.buttonPlay.setOnClickListener {
             if (binding.editTextName.length() < 1) {
                 binding.textViewStatus.text = "請輸入玩家姓名"
                 return@setOnClickListener
